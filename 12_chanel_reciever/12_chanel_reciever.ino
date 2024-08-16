@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-
+//Pin declaration
 const int relayPin1=A0;
 const int relayPin2=A1;
 const int relayPin3=A2;
@@ -18,8 +18,8 @@ const int relayPin12=7;
 int buttonState = 0;
 
 RF24 radio(9, 10); // CE, CSN
-const byte address[9] = "22022003";
-
+const byte address[9] = "22022003";//Secret key
+//State decleration
 void setup() {
   Serial.begin(9600);
   pinMode(relayPin1, OUTPUT);
@@ -50,7 +50,7 @@ void setup() {
   radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_MIN);
 }
-
+//Main Code
 void loop() {
   radio.startListening();
   while (!radio.available());
@@ -58,14 +58,8 @@ void loop() {
   Serial.println(buttonState);
 
   if (buttonState == 1) {
-    for(int i=1;i>1;i++)
-    {
     digitalWrite(relayPin1, HIGH);
-    delay(250);
-    digitalWrite(relayPin1, LOW);
-    delay(250);
-    }
-  }
+      }
   else  if (buttonState == 0) {
     digitalWrite(relayPin1, LOW);
   }
